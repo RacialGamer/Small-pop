@@ -1,7 +1,28 @@
 {
-  "text.autoconfig.smallpop.title": "Small View Model Config",
+  "text.autoconfig.smallpop.title": "Small Totem Config",
+  "text.autoconfig.smallpop.category.default": "General",
+  "text.autoconfig.smallpop.option.totemSize.@PrefixText": "Totem Size",
+  "text.autoconfig.smallpop.option.totemSize": "Edit the Size of the Totem",
   "text.autoconfig.smallpop.option.popSize.@PrefixText": "Totem Pop Size",
   "text.autoconfig.smallpop.option.popSize": "Edit the Pop Size of your Totem",
-  "text.autoconfig.smallpop.option.totemSize.@PrefixText": "Totem Size",
-  "text.autoconfig.smallpop.option.totemSize": "Edit the Size of the Totem"
+
+  "text.autoconfig.smallpop.category.Totem Animation": "Totem Animation",
+  "text.autoconfig.smallpop.option.enableTotemSizeChange.@PrefixText": "Totem Size Animation",
+  "text.autoconfig.smallpop.option.enableTotemSizeChange": "Enable Totem Size Animation",
+  "text.autoconfig.smallpop.option.totemSizeChangeSpeed": "Totem Size Animation Speed",
+  "text.autoconfig.smallpop.option.minTotemSize": "Minimum Totem Size",
+  "text.autoconfig.smallpop.option.maxTotemSize": "Maximum Totem Size",
+
+  "text.autoconfig.smallpop.category.Totem Pop Animation": "Totem Pop Animation",
+  "text.autoconfig.smallpop.option.disableTotemPopAnimation.@PrefixText": "Default Totem Pop Animation",
+  "text.autoconfig.smallpop.option.disableTotemPopAnimation": "Disable Totem Pop Animation Entirely",
+  "text.autoconfig.smallpop.option.animationSpeed": "Totem Pop Animation Speed (In Ticks)",
+  "text.autoconfig.smallpop.option.enableTotemPopPositionChange": "Enable Custom Totem Pop Position",
+  "text.autoconfig.smallpop.option.totemPopPositionX": "Totem Pop Position X-Axis (from center)",
+  "text.autoconfig.smallpop.option.totemPopPositionY": "Totem Pop Position Y-Axis (from center)",
+  "text.autoconfig.smallpop.option.enableTotemPopSizeChange.@PrefixText": "Totem Pop Size Animation",
+  "text.autoconfig.smallpop.option.enableTotemPopSizeChange": "Enable Totem Pop Size Animation",
+  "text.autoconfig.smallpop.option.totemPopSizeChangeSpeed": "Totem Pop Animation Speed",
+  "text.autoconfig.smallpop.option.minTotemPopSize": "Minimum Totem Pop Size",
+  "text.autoconfig.smallpop.option.maxTotemPopSize": "Maximum Totem Pop Size"
 }

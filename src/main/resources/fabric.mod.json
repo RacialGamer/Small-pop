@@ -4,16 +4,16 @@
   "version": "${version}",
 
   "name": "Small pop",
-  "description": "Small pop without needing a texture pack!",
+  "description": "Customizable Pop Animation/Size and Totem Size.",
   "authors": [
     "RacialGamer"
   ],
   "contact": {
-    "homepage": "https://solo.to/cpvp",
+    "homepage": "https://modrinth.com/mod/cpvp",
     "sources": "https://github.com/RacialGamer/Small-pop"
   },
 
-  "license": "CC0-1.0",
+  "license": "ARR",
   "icon": "assets/smallpop/icon.png",
 
   "environment": "*",
