@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "smallpop",
   "version": "${version}",
-  "name": "Small pop",
+  "name": "SmallPop",
   "description": "Customizable Pop Animation/Size and Totem Size.",
   "authors": [
     "RacialGamer"
@@ -16,7 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.racialgamer.smallpop.Smallpop"
+      "net.racialgamer.smallpop.SmallPop"
     ],
     "modmenu": [
       "net.racialgamer.smallpop.config.ModMenu"

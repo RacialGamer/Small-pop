@@ -5,7 +5,7 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.racialgamer.smallpop.config.Gui;
 
-public class Smallpop implements ModInitializer {
+public class SmallPop implements ModInitializer {
 
     @Override
     public void onInitialize() {
