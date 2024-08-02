@@ -1,8 +1,9 @@
 package net.racialgamer.smallpop;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.racialgamer.smallpop.config.Gui;
 
 public class Smallpop implements ModInitializer {
 
