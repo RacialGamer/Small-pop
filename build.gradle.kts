@@ -51,7 +51,7 @@ tasks {
 
 publishing {
     publications {
-        create<MavenPublication>("mod") {
+        create<MavenPublication>("SmallPop") {
             from(components["java"])
         }
     }
