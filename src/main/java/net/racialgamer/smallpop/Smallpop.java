@@ -7,8 +7,8 @@ import net.racialgamer.smallpop.config.Gui;
 
 public class Smallpop implements ModInitializer {
 
-	@Override
-	public void onInitialize() {
-		AutoConfig.register(Gui.class, GsonConfigSerializer::new);
-	}
+    @Override
+    public void onInitialize() {
+        AutoConfig.register(Gui.class, GsonConfigSerializer::new);
+    }
 }

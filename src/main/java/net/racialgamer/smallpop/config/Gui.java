@@ -10,7 +10,6 @@ import static me.shedaniel.autoconfig.AutoConfig.getConfigHolder;
 @Config(name = "smallpop")
 public class Gui implements ConfigData {
 
-
     @ConfigEntry.Gui.PrefixText
     public float totemSize = 1f;
     @ConfigEntry.Gui.PrefixText
@@ -47,8 +46,6 @@ public class Gui implements ConfigData {
     public float minTotemPopSize = 0.3f;
     @ConfigEntry.Category("Totem Pop Animation")
     public float maxTotemPopSize = 0.9f;
-
-
 
 
     public static Gui get() {
