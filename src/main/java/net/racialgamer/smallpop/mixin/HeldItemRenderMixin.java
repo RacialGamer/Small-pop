@@ -19,14 +19,14 @@ public abstract class HeldItemRenderMixin {
 
     @Inject(method = "renderFirstPersonItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/HeldItemRenderer;renderItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"))
     private void renderFirstPersonItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo info) {
-            if (Gui.get().enableTotemSizeChange && item.getItem() == Items.TOTEM_OF_UNDYING) {
-                float sizeRange = Gui.get().maxTotemSize - Gui.get().minTotemSize;
-                float size = (float) (Math.sin(System.currentTimeMillis() / 1000.0 * Gui.get().totemSizeChangeSpeed) / 2 + 0.5) * sizeRange + Gui.get().minTotemSize;
-                matrices.scale(size, size, size);
-            } else if (hand == Hand.MAIN_HAND && item.getItem() == Items.TOTEM_OF_UNDYING) {
-                matrices.scale(Gui.get().totemSize, Gui.get().totemSize, Gui.get().totemSize);
-            } else if (hand == Hand.OFF_HAND && item.getItem() == Items.TOTEM_OF_UNDYING) {
-                matrices.scale(Gui.get().totemSize, Gui.get().totemSize, Gui.get().totemSize);
+        if (Gui.get().enableTotemSizeChange && item.getItem() == Items.TOTEM_OF_UNDYING) {
+            float sizeRange = Gui.get().maxTotemSize - Gui.get().minTotemSize;
+            float size = (float) (Math.sin(System.currentTimeMillis() / 1000.0 * Gui.get().totemSizeChangeSpeed) / 2 + 0.5) * sizeRange + Gui.get().minTotemSize;
+            matrices.scale(size, size, size);
+        } else if (hand == Hand.MAIN_HAND && item.getItem() == Items.TOTEM_OF_UNDYING) {
+            matrices.scale(Gui.get().totemSize, Gui.get().totemSize, Gui.get().totemSize);
+        } else if (hand == Hand.OFF_HAND && item.getItem() == Items.TOTEM_OF_UNDYING) {
+            matrices.scale(Gui.get().totemSize, Gui.get().totemSize, Gui.get().totemSize);
         }
     }
 }

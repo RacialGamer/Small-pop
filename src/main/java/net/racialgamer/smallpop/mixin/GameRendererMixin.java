@@ -28,14 +28,16 @@ public class GameRendererMixin {
     @Inject(method = "showFloatingItem", at = @At("TAIL"))
     public void InjectShowFloatingItem(ItemStack floatingItem, CallbackInfo ci) {
         this.floatingItem = floatingItem;
-        if(Gui.get().disableTotemPopAnimation) {
+
+        if (Gui.get().disableTotemPopAnimation) {
             this.floatingItemTimeLeft = 0;
         } else {
             this.floatingItemTimeLeft = Gui.get().animationSpeed;
         }
+
         if (Gui.get().enableTotemPopPositionChange) {
-           this.floatingItemWidth = Gui.get().totemPopPositionX;
-           this.floatingItemHeight = Gui.get().totemPopPositionY;
+            this.floatingItemWidth = Gui.get().totemPopPositionX;
+            this.floatingItemHeight = Gui.get().totemPopPositionY;
         }
     }
 

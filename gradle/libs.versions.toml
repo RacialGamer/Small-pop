@@ -1,0 +1,21 @@
+[versions]
+# Fabric Properties
+# check these on https://fabricmc.net/develop
+minecraft-version = "1.20"
+yarn-mappings = "1.20+build.1"
+loader-version = "0.14.21"
+fabric-version = "0.83.0+1.20"
+fabric-loom = "1.7.2"
+modmenu = "7.0.1"
+cloth-config = "11.1.106"
+
+[libraries]
+minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft-version" }
+yarn = { group = "net.fabricmc", name = "yarn", version.ref = "yarn-mappings" }
+fabric-loader = { group = "net.fabricmc", name = "fabric-loader", version.ref = "loader-version" }
+fabric-api = { group = "net.fabricmc.fabric-api", name = "fabric-api", version.ref = "fabric-version" }
+modmenu = { group = "com.terraformersmc", name = "modmenu", version.ref = "modmenu" }
+cloth-config = { group = "me.shedaniel.cloth", name = "cloth-config-fabric", version.ref = "cloth-config" }
+
+[plugins]
+fabric-loom = { id = "fabric-loom", version.ref = "fabric-loom" }
