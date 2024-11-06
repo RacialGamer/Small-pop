@@ -2,7 +2,8 @@
   "schemaVersion": 1,
   "id": "smallpop",
   "version": "${version}",
-  "name": "SmallPop",
+
+  "name": "Small pop",
   "description": "Customizable Pop Animation/Size and Totem Size.",
   "authors": [
     "RacialGamer"
@@ -11,24 +12,27 @@
     "homepage": "https://modrinth.com/mod/cpvp",
     "sources": "https://github.com/RacialGamer/Small-pop"
   },
+
   "license": "ARR",
-  "icon": "assets/smallpop/icon.png",
+  "icon": "assets/totemtweaks/icon.png",
+
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.racialgamer.smallpop.SmallPop"
+      "net.racialgamer.totemtweaks.TotemTweaks"
     ],
     "modmenu": [
-      "net.racialgamer.smallpop.config.ModMenu"
+      "net.racialgamer.totemtweaks.config.ModMenu"
     ]
   },
   "mixins": [
-    "smallpop.mixins.json"
+    "totemtweaks.mixins.json"
   ],
+
   "depends": {
     "fabricloader": ">=0.14.21",
     "fabric-api": "*",
-    "minecraft": "~1.20",
+    "minecraft": "~1.21",
     "java": ">=17"
   },
   "suggests": {
