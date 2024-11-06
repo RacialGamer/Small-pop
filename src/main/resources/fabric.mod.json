@@ -1,36 +1,38 @@
 {
   "schemaVersion": 1,
-  "id": "smallpop",
+  "id": "totemtweaks",
   "version": "${version}",
 
-  "name": "Small pop",
-  "description": "Small pop without needing a texture pack!",
+  "name": "Totem Tweaks",
+  "description": "Changeable totem sizes and extensive customizability of the pop animation.",
   "authors": [
     "RacialGamer"
   ],
   "contact": {
-    "homepage": "https://solo.to/cpvp",
+    "homepage": "https://modrinth.com/mod/cpvp",
     "sources": "https://github.com/RacialGamer/Small-pop"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/smallpop/icon.png",
+  "license": "ARR",
+  "icon": "assets/totemtweaks/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.racialgamer.cheese.Smallpop"
+      "net.racialgamer.totemtweaks.TotemTweaks"
+    ],
+    "modmenu": [
+      "net.racialgamer.totemtweaks.config.ModMenu"
     ]
   },
-  "mixins": [],
+  "mixins": [
+    "totemtweaks.mixins.json"
+  ],
 
   "depends": {
-    "fabricloader": ">=0.14.14",
+    "fabricloader": ">=0.16.0",
     "fabric-api": "*",
-    "minecraft": "~1.19.2",
+    "minecraft": ">=1.20 <=1.20.6",
     "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
