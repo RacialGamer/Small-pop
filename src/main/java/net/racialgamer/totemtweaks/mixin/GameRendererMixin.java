@@ -57,8 +57,7 @@ public class GameRendererMixin {
         return n * Gui.get().popSize;
     }
 
-    @ModifyArgs(method = "renderFloatingItem(Lnet/minecraft/client/gui/DrawContext;F)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V")
-    )
+    @ModifyArgs(method = "renderFloatingItem(Lnet/minecraft/client/gui/DrawContext;F)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V"))
     private void modifyTranslateArgs(Args args) {
         float originalX = args.get(0);
         float originalY = args.get(1);
