@@ -53,10 +53,13 @@ public class Gui implements ConfigData {
 
     @ConfigEntry.Category("Totem Pop")
     @ConfigEntry.Gui.Tooltip
-    public int xPosition = 0;
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+    public int xPosition = 50;
+
     @ConfigEntry.Category("Totem Pop")
     @ConfigEntry.Gui.Tooltip
-    public int yPosition = 0;
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
+    public int yPosition = 50;
 
     @ConfigEntry.Category("Totem Pop")
     @ConfigEntry.Gui.PrefixText

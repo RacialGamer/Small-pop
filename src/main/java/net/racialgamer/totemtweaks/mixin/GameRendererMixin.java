@@ -1,6 +1,7 @@
 package net.racialgamer.totemtweaks.mixin;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
@@ -39,8 +40,8 @@ public class GameRendererMixin {
             this.floatingItemTimeLeft = Gui.get().animationSpeed;
         }
         if (Gui.get().lockRotationPosition) {
-            this.floatingItemWidth = 0; // TODO: MAKE OPTION FOR ALL RESOLUTIONS
-            this.floatingItemHeight = 0; // TODO: MAKE OPTION FOR ALL RESOLUTIONS
+            this.floatingItemWidth = 0;
+            this.floatingItemHeight = 0;
         }
     }
 
@@ -61,8 +62,12 @@ public class GameRendererMixin {
     private void modifyTranslateArgs(Args args) {
         float originalX = args.get(0);
         float originalY = args.get(1);
-        args.set(0, originalX + Gui.get().xPosition);
-        args.set(1, originalY + Gui.get().yPosition);
+        float screenWidth = MinecraftClient.getInstance().getWindow().getScaledWidth();
+        float screenHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
+        float adjustedX = originalX + ((Gui.get().xPosition - 50) / 100.0f * screenWidth);
+        float adjustedY = originalY + ((Gui.get().yPosition - 50) / 100.0f * screenHeight);
+        args.set(0, adjustedX);
+        args.set(1, adjustedY);
     }
 
 
