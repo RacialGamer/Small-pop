@@ -33,10 +33,14 @@ public class Gui implements ConfigData {
 
     @ConfigEntry.Category("Totem Pop")
     @ConfigEntry.Gui.PrefixText
-    public boolean disableTotemPopAnimation = false;
+    public boolean TotemPopAnimation = false;
 
     @ConfigEntry.Category("Totem Pop")
-    @ConfigEntry.BoundedDiscrete(min = 1, max = 100)
+    @ConfigEntry.Gui.Tooltip
+    public boolean showTotemCount = true; // Add this line
+
+    @ConfigEntry.Category("Totem Pop")
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 100)
     public int animationSpeed = 40;
 
     @ConfigEntry.Category("Totem Pop")
@@ -70,11 +74,9 @@ public class Gui implements ConfigData {
     public float totemPopSizeChangeSpeed = 1.0f;
 
     @ConfigEntry.Category("Totem Pop")
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 2)
     public float minTotemPopSize = 0.3f;
 
     @ConfigEntry.Category("Totem Pop")
-    @ConfigEntry.BoundedDiscrete(min = 0, max = 2)
     public float maxTotemPopSize = 0.9f;
 
     public static Gui get() {

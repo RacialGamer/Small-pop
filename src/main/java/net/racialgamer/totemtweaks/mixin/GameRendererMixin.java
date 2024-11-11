@@ -2,9 +2,11 @@ package net.racialgamer.totemtweaks.mixin;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.racialgamer.totemtweaks.config.Gui;
 import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,7 +36,7 @@ public class GameRendererMixin {
     @Inject(method = "showFloatingItem", at = @At("TAIL"))
     public void InjectShowFloatingItem(ItemStack floatingItem, CallbackInfo ci) {
         this.floatingItem = floatingItem;
-        if (Gui.get().disableTotemPopAnimation) {
+        if (Gui.get().TotemPopAnimation) {
             this.floatingItemTimeLeft = 0;
         } else {
             this.floatingItemTimeLeft = Gui.get().animationSpeed;
@@ -45,6 +47,29 @@ public class GameRendererMixin {
         }
     }
 
+    @Inject(method = "renderFloatingItem", at = @At("TAIL"))
+    public void renderFloatingItemWithTotemCount(DrawContext context, float tickDelta, CallbackInfo ci) {
+        if (Gui.get().showTotemCount && floatingItem != null && floatingItem.getItem() == Items.TOTEM_OF_UNDYING) {
+            int totemCount = getTotemCount();
+            String countText = "Totems: " + totemCount;
+            int screenWidth = MinecraftClient.getInstance().getWindow().getScaledWidth();
+            int screenHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
+            int textWidth = MinecraftClient.getInstance().textRenderer.getWidth(countText);
+            int x = (screenWidth - textWidth) / 2;
+            int y = screenHeight / 2 + 20;
+            context.drawText(MinecraftClient.getInstance().textRenderer, countText, x, y, 0xFFFFFF, true);
+        }
+    }
+
+    private int getTotemCount() {
+        int count = 0;
+        for (ItemStack stack : MinecraftClient.getInstance().player.getInventory().main) {
+            if (stack.getItem() == Items.TOTEM_OF_UNDYING) {
+                count += stack.getCount();
+            }
+        }
+        return count;
+    }
 
     @ModifyVariable(method = "renderFloatingItem", at = @At("STORE"), ordinal = 0)
     private int modifyTickRenderfloatingItem(int i) {

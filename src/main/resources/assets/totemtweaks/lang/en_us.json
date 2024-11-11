@@ -17,8 +17,10 @@
   "text.autoconfig.totemtweaks.option.maxTotemSize": "Maximum Totem Size",
 
   "text.autoconfig.totemtweaks.category.Totem Pop": "Totem Pop",
-  "text.autoconfig.totemtweaks.option.disableTotemPopAnimation.@PrefixText": "Default Totem Pop Animation",
-  "text.autoconfig.totemtweaks.option.disableTotemPopAnimation": "Disable Totem Pop Animation",
+  "text.autoconfig.totemtweaks.option.TotemPopAnimation.@PrefixText": "Default Totem Pop Animation",
+  "text.autoconfig.totemtweaks.option.TotemPopAnimation": "Totem Pop Animation",
+  "text.autoconfig.totemtweaks.option.showTotemCount.@Tooltip": "Show the number of Totems in your inventory",
+  "text.autoconfig.totemtweaks.option.showTotemCount": "Show Own Totem Count under Crosshair",
   "text.autoconfig.totemtweaks.option.animationSpeed": "Totem Pop Animation Speed (In Ticks)",
   "text.autoconfig.totemtweaks.option.lockRotationPosition.@Tooltip": "Locks position during animation",
   "text.autoconfig.totemtweaks.option.lockRotationPosition": "Lock Rotation Position",
