@@ -33,11 +33,24 @@ public class Gui implements ConfigData {
 
     @ConfigEntry.Category("Totem Pop")
     @ConfigEntry.Gui.PrefixText
-    public boolean TotemPopAnimation = false;
+    public boolean TotemPopAnimation = true;
 
     @ConfigEntry.Category("Totem Pop")
     @ConfigEntry.Gui.Tooltip
-    public boolean showTotemCount = true; // Add this line
+    public boolean showTotemCount = false;
+
+    @ConfigEntry.Category("Totem Pop")
+    @ConfigEntry.Gui.Tooltip
+    public boolean showOverlay = false;
+
+    @ConfigEntry.Category("Totem Pop")
+    @ConfigEntry.ColorPicker
+    public int overlayColor = 0xFF0000;
+
+    @ConfigEntry.Category("Totem Pop")
+    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 255)
+    public int overlayOpacity = 128;
 
     @ConfigEntry.Category("Totem Pop")
     @ConfigEntry.BoundedDiscrete(min = 0, max = 100)

@@ -21,6 +21,8 @@
   "text.autoconfig.totemtweaks.option.TotemPopAnimation": "Totem Pop Animation",
   "text.autoconfig.totemtweaks.option.showTotemCount.@Tooltip": "Show the number of Totems in your inventory",
   "text.autoconfig.totemtweaks.option.showTotemCount": "Show Own Totem Count under Crosshair",
+  "text.autoconfig.totemtweaks.option.showOverlay.@Tooltip": "Shows a overlay when a totem pops",
+  "text.autoconfig.totemtweaks.option.showOverlay": "Show Color Overlay upon Totem Pop",
   "text.autoconfig.totemtweaks.option.animationSpeed": "Totem Pop Animation Speed (In Ticks)",
   "text.autoconfig.totemtweaks.option.lockRotationPosition.@Tooltip": "Locks position during animation",
   "text.autoconfig.totemtweaks.option.lockRotationPosition": "Lock Rotation Position",
