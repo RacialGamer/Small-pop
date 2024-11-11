@@ -45,6 +45,17 @@ public class GameRendererMixin {
         }
     }
 
+
+    @ModifyVariable(method = "renderFloatingItem", at = @At("STORE"), ordinal = 0)
+    private int modifyTickRenderfloatingItem(int i) {
+        return Gui.get().animationSpeed - floatingItemTimeLeft;
+    }
+
+    @ModifyVariable(method = "renderFloatingItem", at = @At("STORE"), ordinal = 1)
+    private float modifyFloatRenderfloatingItem(float f) {
+        return f * 40 / Gui.get().animationSpeed;
+    }
+
     @ModifyVariable(method = "renderFloatingItem", at = @At("STORE"), ordinal = 8)
     private float modifySizeRenderfloatingItem(float n) {
         if (Gui.get().enableTotemPopSizeChange) {
@@ -69,7 +80,6 @@ public class GameRendererMixin {
         args.set(0, adjustedX);
         args.set(1, adjustedY);
     }
-
 
 
     @WrapWithCondition(method = "renderFloatingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;multiply(Lorg/joml/Quaternionf;)V", ordinal = 0))
