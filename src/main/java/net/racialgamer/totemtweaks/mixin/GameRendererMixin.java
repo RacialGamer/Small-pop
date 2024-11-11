@@ -34,6 +34,9 @@ public class GameRendererMixin {
     @Shadow
     private float floatingItemHeight;
 
+    @Unique
+    private int overlayTimeLeft = 0;
+
     @Inject(method = "showFloatingItem", at = @At("TAIL"))
     public void InjectShowFloatingItem(ItemStack floatingItem, CallbackInfo ci) {
         this.floatingItem = floatingItem;
@@ -45,6 +48,9 @@ public class GameRendererMixin {
         if (Gui.get().lockRotationPosition) {
             this.floatingItemWidth = 0;
             this.floatingItemHeight = 0;
+        }
+        if (Gui.get().showOverlay) {
+            this.overlayTimeLeft = Gui.get().animationSpeed;
         }
     }
 
@@ -59,9 +65,12 @@ public class GameRendererMixin {
             int x = (screenWidth - textWidth) / 2;
             int y = screenHeight / 2 + 20;
             context.drawText(MinecraftClient.getInstance().textRenderer, countText, x, y, 0xFFFFFF, true);
-            if (Gui.get().showOverlay) {
-                int color = Gui.get().overlayColor & 0x00FFFFFF | (Gui.get().overlayOpacity << 24);
+            if (Gui.get().showOverlay && overlayTimeLeft > 0) {
+                int baseColor = Gui.get().overlayColor & 0x00FFFFFF;
+                int alpha = (int) ((Gui.get().overlayOpacity / 255.0) * (overlayTimeLeft / (float) Gui.get().animationSpeed) * 255);
+                int color = baseColor | (alpha << 24);
                 context.fill(0, 0, screenWidth, screenHeight, color);
+                overlayTimeLeft--;
             }
         }
     }
