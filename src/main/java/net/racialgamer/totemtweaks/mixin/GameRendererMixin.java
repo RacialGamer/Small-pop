@@ -35,7 +35,7 @@ public class GameRendererMixin {
     private float floatingItemHeight;
 
     @Unique
-    private int overlayTimeLeft = 0;
+    private int overlayTimeLeft;
 
     @Inject(method = "showFloatingItem", at = @At("TAIL"))
     public void InjectShowFloatingItem(ItemStack floatingItem, CallbackInfo ci) {
@@ -55,7 +55,7 @@ public class GameRendererMixin {
     }
 
     @Inject(method = "renderFloatingItem", at = @At("TAIL"))
-    public void renderFloatingItemWithTotemCount(DrawContext context, float tickDelta, CallbackInfo ci) {
+    public void renderFloatingItemWithOverlays(DrawContext context, float tickDelta, CallbackInfo ci) {
         if (Gui.get().showTotemCount && floatingItem != null && floatingItem.getItem() == Items.TOTEM_OF_UNDYING) {
             int totemCount = getTotemCount();
             String countText = "Totems: " + totemCount;
