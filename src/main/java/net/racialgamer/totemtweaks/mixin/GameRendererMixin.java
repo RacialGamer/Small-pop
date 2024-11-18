@@ -1,6 +1,7 @@
 package net.racialgamer.totemtweaks.mixin;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.terraformersmc.modmenu.ModMenu;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.GameRenderer;
@@ -72,6 +73,9 @@ public class GameRendererMixin {
                 context.fill(0, 0, screenWidth, screenHeight, color);
                 overlayTimeLeft--;
             }
+        }
+        if (Gui.get().showOverlay) {
+            overlayTimeLeft = floatingItemTimeLeft;
         }
     }
 
