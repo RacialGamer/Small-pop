@@ -24,11 +24,9 @@ public class TotemTweaks implements ModInitializer {
 	private void registerCommands() {
 		ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
 			dispatcher.register(ClientCommandManager.literal("totemTweaks")
-					.executes(context -> {
-						MinecraftClient.getInstance().setScreen(ModMenu.getConfigScreen("totemtweaks", null));
-				return Command.SINGLE_SUCCESS;
-			})
+					.executes(context -> openConfigScreen(context))
 			);
+
 			dispatcher.register(ClientCommandManager.literal("simulatePop")
 					.executes(context -> {
 						simulatePop();
@@ -36,6 +34,14 @@ public class TotemTweaks implements ModInitializer {
 					})
 			);
 		});
+	}
+
+	private int openConfigScreen(CommandContext<?> context) {
+		MinecraftClient client = MinecraftClient.getInstance();
+		client.send(() -> {
+			client.setScreen(ModMenu.getConfigScreen("totemtweaks", client.currentScreen));
+		});
+		return Command.SINGLE_SUCCESS;
 	}
 
 	public static void simulatePop() {
