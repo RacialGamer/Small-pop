@@ -29,4 +29,4 @@ public abstract class HeldItemRenderMixin {
                 matrices.scale(Gui.get().totemSize, Gui.get().totemSize, Gui.get().totemSize);
             }
         }
-    }
+}

@@ -2,13 +2,15 @@ package net.racialgamer.totemtweaks;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
+import com.terraformersmc.modmenu.ModMenu;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.racialgamer.totemtweaks.config.Gui;
 
 public class TotemTweaks implements ModInitializer {
@@ -20,18 +22,31 @@ public class TotemTweaks implements ModInitializer {
 	}
 
 	private void registerCommands() {
-		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, commandEnvironment) -> dispatcher.register(
-				CommandManager.literal("TotemTweaks")
-						.executes(this::openConfigScreen)
-		));
+		ClientCommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+			dispatcher.register(ClientCommandManager.literal("totemTweaks")
+					.executes(context -> openConfigScreen(context))
+			);
+
+			dispatcher.register(ClientCommandManager.literal("simulatePop")
+					.executes(context -> {
+						simulatePop();
+						return Command.SINGLE_SUCCESS;
+					})
+			);
+		});
 	}
 
-	private int openConfigScreen(CommandContext<ServerCommandSource> context) {
+	private int openConfigScreen(CommandContext<?> context) {
 		MinecraftClient client = MinecraftClient.getInstance();
-			client.execute(() ->
-					client.setScreen(AutoConfig.getConfigScreen(Gui.class, client.currentScreen).get())
-			);
-			return Command.SINGLE_SUCCESS;
+		client.send(() -> {
+			client.setScreen(ModMenu.getConfigScreen("totemtweaks", client.currentScreen));
+		});
+		return Command.SINGLE_SUCCESS;
+	}
+
+	public static void simulatePop() {
+		if (MinecraftClient.getInstance().player != null) {
+			MinecraftClient.getInstance().gameRenderer.showFloatingItem(new ItemStack(Items.TOTEM_OF_UNDYING));
+		}
 	}
 }
-
