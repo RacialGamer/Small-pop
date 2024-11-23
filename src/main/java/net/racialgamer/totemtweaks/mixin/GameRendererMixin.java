@@ -1,13 +1,18 @@
 package net.racialgamer.totemtweaks.mixin;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.terraformersmc.modmenu.ModMenu;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.racialgamer.totemtweaks.config.Gui;
 import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
@@ -30,18 +35,70 @@ public class GameRendererMixin {
     @Shadow
     private float floatingItemHeight;
 
+    @Unique
+    private int overlayTimeLeft;
+
     @Inject(method = "showFloatingItem", at = @At("TAIL"))
     public void InjectShowFloatingItem(ItemStack floatingItem, CallbackInfo ci) {
         this.floatingItem = floatingItem;
-        if (Gui.get().disableTotemPopAnimation) {
+        if (!Gui.get().TotemPopAnimation) {
             this.floatingItemTimeLeft = 0;
         } else {
             this.floatingItemTimeLeft = Gui.get().animationSpeed;
         }
         if (Gui.get().lockRotationPosition) {
-            this.floatingItemWidth = 0; // TODO: MAKE OPTION FOR ALL RESOLUTIONS
-            this.floatingItemHeight = 0; // TODO: MAKE OPTION FOR ALL RESOLUTIONS
+            this.floatingItemWidth = 0;
+            this.floatingItemHeight = 0;
         }
+        if (Gui.get().showOverlay) {
+            this.overlayTimeLeft = Gui.get().animationSpeed;
+        }
+    }
+
+    @Inject(method = "renderFloatingItem", at = @At("TAIL"))
+    public void renderFloatingItemWithOverlays(DrawContext context, float tickDelta, CallbackInfo ci) {
+        if (Gui.get().showTotemCount && floatingItem != null && floatingItem.getItem() == Items.TOTEM_OF_UNDYING) {
+            int totemCount = getTotemCount();
+            String countText = "Totems: " + totemCount;
+            int screenWidth = MinecraftClient.getInstance().getWindow().getScaledWidth();
+            int screenHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
+            int textWidth = MinecraftClient.getInstance().textRenderer.getWidth(countText);
+            int x = (screenWidth - textWidth) / 2;
+            int y = screenHeight / 2 + 20;
+            context.drawText(MinecraftClient.getInstance().textRenderer, countText, x, y, 0xFFFFFF, true);
+            if (Gui.get().showOverlay && overlayTimeLeft > 0) {
+                int baseColor = Gui.get().overlayColor & 0x00FFFFFF;
+                int alpha = (int) ((Gui.get().overlayOpacity / 255.0) * (overlayTimeLeft / (float) Gui.get().animationSpeed) * 255);
+                int color = baseColor | (alpha << 24);
+                context.fill(0, 0, screenWidth, screenHeight, color);
+                overlayTimeLeft--;
+            }
+        }
+        if (Gui.get().showOverlay) {
+            overlayTimeLeft = floatingItemTimeLeft;
+        }
+    }
+
+    @Unique
+    private int getTotemCount() {
+        int count = 0;
+        assert MinecraftClient.getInstance().player != null;
+        for (ItemStack stack : MinecraftClient.getInstance().player.getInventory().main) {
+            if (stack.getItem() == Items.TOTEM_OF_UNDYING) {
+                count += stack.getCount();
+            }
+        }
+        return count;
+    }
+
+    @ModifyVariable(method = "renderFloatingItem", at = @At("STORE"), ordinal = 0)
+    private int modifyTickRenderfloatingItem(int i) {
+        return Gui.get().animationSpeed - floatingItemTimeLeft;
+    }
+
+    @ModifyVariable(method = "renderFloatingItem", at = @At("STORE"), ordinal = 1)
+    private float modifyFloatRenderfloatingItem(float f) {
+        return f * 40 / Gui.get().animationSpeed;
     }
 
     @ModifyVariable(method = "renderFloatingItem", at = @At("STORE"), ordinal = 8)
@@ -57,15 +114,17 @@ public class GameRendererMixin {
         return n * Gui.get().popSize;
     }
 
-    @ModifyArgs(method = "renderFloatingItem(Lnet/minecraft/client/gui/DrawContext;F)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V")
-    )
+    @ModifyArgs(method = "renderFloatingItem(Lnet/minecraft/client/gui/DrawContext;F)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V"))
     private void modifyTranslateArgs(Args args) {
         float originalX = args.get(0);
         float originalY = args.get(1);
-        args.set(0, originalX + Gui.get().xPosition);
-        args.set(1, originalY + Gui.get().yPosition);
+        float screenWidth = MinecraftClient.getInstance().getWindow().getScaledWidth();
+        float screenHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
+        float adjustedX = originalX + ((Gui.get().xPosition - 50) / 100.0f * screenWidth);
+        float adjustedY = originalY + ((Gui.get().yPosition - 50) / 100.0f * screenHeight);
+        args.set(0, adjustedX);
+        args.set(1, adjustedY);
     }
-
 
 
     @WrapWithCondition(method = "renderFloatingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/math/MatrixStack;multiply(Lorg/joml/Quaternionf;)V", ordinal = 0))
