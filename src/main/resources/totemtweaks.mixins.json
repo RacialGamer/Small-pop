@@ -6,7 +6,9 @@
     "GameRendererMixin",
     "HeldItemRenderMixin"
   ],
-  "client": [],
+  "client": [
+    "TitleScreenMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1
