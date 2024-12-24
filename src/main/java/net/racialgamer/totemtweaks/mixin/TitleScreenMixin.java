@@ -39,7 +39,7 @@ public class TitleScreenMixin extends Screen {
         int y = (int) ((this.height - cardHeight) / 2.5);
         int textureX = x + (cardWidth - textureWidth) / 2;
         int textureY = y + (cardHeight - textureHeight) / 2;
-        context.drawTexture(RenderLayer::getGuiTextured, texture, textureX, textureY, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
+        context.drawTexture(texture, textureX, textureY, 0, 0, textureWidth, textureHeight, textureWidth, textureHeight);
         drawTextBalloon(context, x + 70, y + 20);
         checkForUpdate();
     }
